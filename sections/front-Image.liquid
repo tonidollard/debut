@@ -1,0 +1,164 @@
+<div class="page-width front-image-section" data-section-id="{{ section.id }}" data-section-type="front-image">
+    <div class="section-header">
+      <h2 class="h1">{{ section.settings.title }}</h2>
+    </div>
+      {% if section.settings.image != blank %}
+        {% capture img_id %}FeatureRowImage-{{ section.id }}{% endcapture %}
+        {% capture wrapper_id %}FeatureRowImageWrapper-{{ section.id }}{% endcapture %}
+        {%- assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+        {% include 'image-style', image: section.settings.image, height: 464, wrapper_id: wrapper_id, img_id: img_id %}
+        <div id="{{ wrapper_id }}" class="feature-row__image-wrapper js">
+          <div style="padding-top:{{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100}}%;" data-image-loading-animation>
+            <img id="{{ img_id }}"
+                 class="feature-row__image lazyload"
+                 data-src="{{ img_url }}"
+                 data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                 data-aspectratio="{{ section.settings.image.aspect_ratio }}"
+                 data-sizes="auto"
+                 alt="{{ section.settings.image.alt | escape }}">
+          </div>
+        </div>
+
+        <noscript>
+          {{ section.settings.image | img_url: '600x600', scale: 2 | img_tag: section.settings.image.alt, 'feature-row__image' }}
+        </noscript>
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": {
+    "cs": "Obrázek s textem",
+    "da": "Billede med tekst",
+    "de": "Foto mit Text",
+    "en": "Front Image",
+    "es": "Imagen con texto",
+    "fi": "Kuva tekstillä",
+    "fr": "Image avec texte",
+    "it": "Immagine con testo",
+    "ja": "テキスト付き画像",
+    "ko": "텍스트 포함 이미지",
+    "nb": "Bilde med tekst",
+    "nl": "Afbeelding met tekst",
+    "pl": "Obraz z tekstem",
+    "pt-BR": "Imagem com texto",
+    "pt-PT": "Imagem com texto",
+    "sv": "Bild med text",
+    "th": "รูปภาพพร้อมข้อความ",
+    "tr": "Metin içeren görsel",
+    "vi": "Hình ảnh có chữ",
+    "zh-CN": "带文本的图片",
+    "zh-TW": "附文字的圖片"
+  },
+  "class": "index-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": {
+        "cs": "Obrázek",
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pl": "Obraz",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "tr": "Görsel",
+        "vi": "Hình ảnh",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": {
+        "cs": "Nadpis",
+        "da": "Overskrift",
+        "de": "Titel",
+        "en": "Heading",
+        "es": "Título",
+        "fi": "Otsake",
+        "fr": "En-tête",
+        "it": "Titolo",
+        "ja": "見出し",
+        "ko": "제목",
+        "nb": "Overskrift",
+        "nl": "Kop",
+        "pl": "Nagłówek",
+        "pt-BR": "Título",
+        "pt-PT": "Título",
+        "sv": "Rubrik",
+        "th": "ส่วนหัว",
+        "tr": "Başlık",
+        "vi": "Tiêu đề",
+        "zh-CN": "标题",
+        "zh-TW": "標題"
+      },
+      "default": {
+        "cs": "Obrázek s textem",
+        "da": "Billede med tekst",
+        "de": "Foto mit Text",
+        "en": "Image with text",
+        "es": "Imagen con texto",
+        "fi": "Kuva tekstillä",
+        "fr": "Image avec texte",
+        "it": "Immagine con testo",
+        "ja": "テキスト付き画像",
+        "ko": "텍스트 포함 이미지",
+        "nb": "Bilde med tekst",
+        "nl": "Afbeelding met tekst",
+        "pl": "Obraz z tekstem",
+        "pt-BR": "Imagem com texto",
+        "pt-PT": "Imagem com texto",
+        "sv": "Bild med text",
+        "th": "รูปภาพพร้อมข้อความ",
+        "tr": "Metin içeren görsel",
+        "vi": "Hình ảnh có chữ",
+        "zh-CN": "带文本的图片",
+        "zh-TW": "附文字的圖片"
+      }
+    }
+  ],
+  "presets": [
+    {
+      "name": "Front Image",
+      "category": {
+        "cs": "Obrázek",
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pl": "Obraz",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "tr": "Görsel",
+        "vi": "Hình ảnh",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
+    }
+  ]
+}
+{% endschema %}
